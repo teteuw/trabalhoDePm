@@ -1,4 +1,4 @@
-package br.pm;
+package br.pm.main;
 
 public class Main {
     public static void main(String[] args) {

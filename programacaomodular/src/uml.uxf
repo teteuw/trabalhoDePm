@@ -1,0 +1,36 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>80</x><y>270</y><w>210</w><h>190</h></coordinates><panel_attributes>Livro
+--
+-nomeLivro: String
+-nomeAutor: String
+-numPaginas: int
+-idLivro: Long
+-nomeEditora: String
+-Idioma: String
+-Status: boolean
+--
++emprestar()
++devolver()
++getters and setters()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>660</x><y>330</y><w>210</w><h>140</h></coordinates><panel_attributes>Emprestimo
+--
+-livro: Livro
+-usuario: Usuario
+-dataEmprestimo: LocalDate
+-dataDevolucao: LocalDate
+-devolvido: boolean
+--
++getters and setters()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>660</x><y>220</y><w>210</w><h>70</h></coordinates><panel_attributes>Multa
+&lt;&lt;abstract&gt;&gt;
+--
+--
++calcularMulta</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>740</x><y>280</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>380</x><y>260</y><w>210</w><h>170</h></coordinates><panel_attributes>Biblioteca
+--
+-livros: List&lt;Livro&gt;
+-usuarios: List&lt;Usuario&gt; 
+emprestimos: List&lt;Emprestimo&gt;
+--
++adicionarLivro()
++removerLivro()
++adicionarUsuario()
++removerUsuario()
++buscarLivroId()
++buscarUsuarioId()</panel_attributes><additional_attributes></additional_attributes></element></diagram>
