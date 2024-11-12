@@ -1,4 +1,4 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>0</x><y>240</y><w>210</w><h>190</h></coordinates><panel_attributes>Livro
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>280</x><y>60</y><w>210</w><h>190</h></coordinates><panel_attributes>Livro
 --
 -nomeLivro: String
 -nomeAutor: String
@@ -10,7 +10,7 @@
 --
 +emprestar()
 +devolver()
-+getters and setters()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>580</x><y>300</y><w>210</w><h>140</h></coordinates><panel_attributes>Emprestimo
++getters and setters()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>190</x><y>490</y><w>210</w><h>140</h></coordinates><panel_attributes>Emprestimo
 --
 -livro: Livro
 -usuario: Usuario
@@ -18,11 +18,11 @@
 -dataDevolucao: LocalDate
 -devolvido: boolean
 --
-+getters and setters()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>580</x><y>190</y><w>210</w><h>70</h></coordinates><panel_attributes>Multa
++getters and setters()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>320</y><w>210</w><h>70</h></coordinates><panel_attributes>Multa
 &lt;&lt;abstract&gt;&gt;
 --
 --
-+calcularMulta</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>660</x><y>250</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>300</x><y>230</y><w>210</w><h>170</h></coordinates><panel_attributes>Biblioteca
++calcularMulta</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>380</y><w>60</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>40;10;10;110</additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>240</y><w>210</w><h>170</h></coordinates><panel_attributes>Biblioteca
 --
 -livros: List&lt;Livro&gt;
 -usuarios: List&lt;Usuario&gt; 
@@ -33,9 +33,19 @@ emprestimos: List&lt;Emprestimo&gt;
 +adicionarUsuario()
 +removerUsuario()
 +buscarLivroId()
-+buscarUsuarioId()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>290</x><y>480</y><w>210</w><h>80</h></coordinates><panel_attributes>Usuario
++buscarUsuarioId()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>540</x><y>490</y><w>210</w><h>110</h></coordinates><panel_attributes>Usuario
 --
 -id: Long
 -nome: String
 -multa: double 
-</panel_attributes><additional_attributes></additional_attributes></element></diagram>
+--
++getters and setters()
++pagarmulta
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>620</x><y>400</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>480</x><y>150</y><w>190</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=0..n
+m2=0..1</panel_attributes><additional_attributes>170;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>520</y><w>170</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=0..n
+m2=0..1</panel_attributes><additional_attributes>10;30;150;10</additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>240</y><w>80</w><h>270</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=0..n</panel_attributes><additional_attributes>10;250;60;10</additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>350</y><w>200</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=0..n</panel_attributes><additional_attributes>180;10;10;140</additional_attributes></element></diagram>
