@@ -1,0 +1,322 @@
+//prompt
+Dado um problema A biblioteca precisa de um sistema para gerenciar os livros disponíveis, registrar os usuários, realizar empréstimos e devoluções de livros, calcular multas e fornecer relatórios sobre o status do estoque. O sistema deve ser capaz de:
+
+Registrar novos livros.
+Registrar novos usuários.
+Realizar empréstimos de livros para usuários.
+Realizar a devolução de livros.
+Calcular e aplicar multas para devoluções em atraso.
+Exibir relatórios de livros disponíveis e emprestados.
+Primeiramente faça uma classe Livro que tenha os atributos: 
+-nomeLivro
+-nomeAutor
+-numPaginas
+-idLivro
+-nomeEditora
+-idioma
+-status
+-valor
+Com os getters and setters de cada método, além do método emprestar() que deve setar o status do livro 
+como emprestado false ou retornar um erro caso o livro já esteja emprestado. E o método devolver(), quando o livro está emprestado, 
+se o livro já estiver na biblioteca ele retorna erro.
+
+public class Livro {
+    private String nomeLivro;
+    private String nomeAutor;
+    private int numPaginas;
+    private int idLivro;
+    private String nomeEditora;
+    private String idioma;
+    private boolean status; // true = disponível, false = emprestado
+    private double valor;
+
+    // Construtor
+    public Livro(String nomeLivro, String nomeAutor, int numPaginas, int idLivro, 
+                 String nomeEditora, String idioma, double valor) {
+        this.nomeLivro = nomeLivro;
+        this.nomeAutor = nomeAutor;
+        this.numPaginas = numPaginas;
+        this.idLivro = idLivro;
+        this.nomeEditora = nomeEditora;
+        this.idioma = idioma;
+        this.status = true; // Inicialmente disponível
+        this.valor = valor;
+    }
+
+    // Getters e Setters
+    public String getNomeLivro() {
+        return nomeLivro;
+    }
+
+    public void setNomeLivro(String nomeLivro) {
+        this.nomeLivro = nomeLivro;
+    }
+
+    public String getNomeAutor() {
+        return nomeAutor;
+    }
+
+    public void setNomeAutor(String nomeAutor) {
+        this.nomeAutor = nomeAutor;
+    }
+
+    public int getNumPaginas() {
+        return numPaginas;
+    }
+
+    public void setNumPaginas(int numPaginas) {
+        this.numPaginas = numPaginas;
+    }
+
+    public int getIdLivro() {
+        return idLivro;
+    }
+
+    public void setIdLivro(int idLivro) {
+        this.idLivro = idLivro;
+    }
+
+    public String getNomeEditora() {
+        return nomeEditora;
+    }
+
+    public void setNomeEditora(String nomeEditora) {
+        this.nomeEditora = nomeEditora;
+    }
+
+    public String getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(String idioma) {
+        this.idioma = idioma;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    // Método para emprestar o livro
+    public void emprestar() {
+        if (status) {
+            this.status = false; // Define como emprestado
+            System.out.println("Livro emprestado com sucesso.");
+        } else {
+            throw new IllegalStateException("Erro: O livro já está emprestado.");
+        }
+    }
+
+    // Método para devolver o livro
+    public void devolver() {
+        if (!status) {
+            this.status = true; // Define como disponível
+            System.out.println("Livro devolvido com sucesso.");
+        } else {
+            throw new IllegalStateException("Erro: O livro já está na biblioteca.");
+        }
+    }
+}
+
+
+melhorias possíveis: Ao invés de usar int em Id, usar Long;
+no construtor, ao invés de setar como this.element = element, usar setters setElement(element);
+
+
+Primeiro, escreva uma classe Usuario em Java, com os atributos 
+id, nome e multa, os getters and setters, e o método pagarmulta() que seta a multa como 0.
+
+public class Usuario {
+    private String id;
+    private String nome;
+    private double multa; // Representa o valor da multa em dinheiro
+
+    // Construtor
+    public Usuario(String id, String nome) {
+        this.id = id;
+        this.nome = nome;
+        this.multa = 0.0; // Inicialmente, o usuário não tem multas
+    }
+
+    // Getters e Setters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public double getMulta() {
+        return multa;
+    }
+
+    public void setMulta(double multa) {
+        if (multa < 0) {
+            throw new IllegalArgumentException("A multa não pode ser negativa.");
+        }
+        this.multa = multa;
+    }
+
+    // Método para pagar a multa
+    public void pagarMulta() {
+        if (this.multa > 0) {
+            this.multa = 0.0;
+            System.out.println("Multa paga com sucesso!");
+        } else {
+            System.out.println("Não há multas pendentes para este usuário.");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id='" + id + '\'' +
+                ", nome='" + nome + '\'' +
+                ", multa=" + multa +
+                '}';
+    }
+}
+
+
+ele usou id de usuario como String, ao invés de usar como int (usado anteriormente em id livro) ou melhorar para Long.
+as mesmas alterações de construtores, this.element;
+
+Primeiro, crie uma interface Multa, com o método abstrato calcularMulta()
+
+public interface Multa {
+    /**
+     * Método abstrato para calcular a multa por atraso.
+     * 
+     * @param diasAtrasados número de dias de atraso na devolução.
+     * @return o valor da multa calculada.
+     */
+    double calcularMulta(int diasAtrasados);
+}
+
+nenhuma sugestão de melhoria até então.
+
+
+Primeramente, crie uma classe Emprestimo em java que extende a interface Multa, implementando o método calcularMulta(), 
+a cada dia atrasado a multa será adicionado um real de multa. O valor da multa não pode passar do valor do livro vezes 1,5. 
+Além disso, a classe Empréstimo deverá ter a instância de Livro livro, de Usuario usuario, data de empréstimo, data de devolução, 
+e o status devolvido, cada método deverá ter seus getters and setters().
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+public class Emprestimo implements Multa {
+    private Livro livro;
+    private Usuario usuario;
+    private LocalDate dataEmprestimo;
+    private LocalDate dataDevolucao;
+    private boolean devolvido; // true = devolvido, false = ainda emprestado
+
+    // Construtor
+    public Emprestimo(Livro livro, Usuario usuario, LocalDate dataEmprestimo, LocalDate dataDevolucao) {
+        this.livro = livro;
+        this.usuario = usuario;
+        this.dataEmprestimo = dataEmprestimo;
+        this.dataDevolucao = dataDevolucao;
+        this.devolvido = false; // Inicia como não devolvido
+    }
+
+    // Getters e Setters
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public LocalDate getDataEmprestimo() {
+        return dataEmprestimo;
+    }
+
+    public void setDataEmprestimo(LocalDate dataEmprestimo) {
+        this.dataEmprestimo = dataEmprestimo;
+    }
+
+    public LocalDate getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(LocalDate dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+
+    public boolean isDevolvido() {
+        return devolvido;
+    }
+
+    public void setDevolvido(boolean devolvido) {
+        this.devolvido = devolvido;
+    }
+
+    // Implementação do método calcularMulta
+    @Override
+    public double calcularMulta(int diasAtrasados) {
+        if (diasAtrasados <= 0) {
+            return 0.0; // Sem multa se não houver atraso
+        }
+
+        double multa = diasAtrasados * 1.0; // R$ 1,00 por dia de atraso
+        double valorMaximoMulta = livro.getValor() * 1.5; // Multa máxima = valor do livro * 1.5
+
+        return Math.min(multa, valorMaximoMulta); // Garante que a multa não exceda o limite
+    }
+
+    // Método para calcular o número de dias de atraso
+    public int calcularDiasAtraso() {
+        if (LocalDate.now().isAfter(dataDevolucao)) {
+            return (int) ChronoUnit.DAYS.between(dataDevolucao, LocalDate.now());
+        }
+        return 0; // Sem atraso se a data atual for antes ou igual à data de devolução
+    }
+
+    // Método para finalizar o empréstimo (devolução)
+    public void devolver() {
+        if (devolvido) {
+            throw new IllegalStateException("Erro: O empréstimo já foi finalizado.");
+        }
+        this.devolvido = true;
+        livro.setStatus(true); // Marca o livro como disponível
+        System.out.println("Livro devolvido com sucesso.");
+    }
+}
+
+CalcularDiasAtraso poderia ser um método implementado da interface Multa, same in constructor.
+
+
+
+
+
+

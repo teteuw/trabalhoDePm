@@ -1,4 +1,4 @@
-package br.pm.main;
+package br.pm.mainLLM;
 
 public class Main {
     public static void main(String[] args) {
