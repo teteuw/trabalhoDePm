@@ -1,6 +1,6 @@
 package br.pm.businessLLM;
 
-public interface Multa {
+public interface CalculadoraMulta {
     /**
      * Método abstrato para calcular a multa por atraso.
      * 
@@ -8,5 +8,13 @@ public interface Multa {
      * @return o valor da multa calculada.
      */
     double calcularMulta(int diasAtrasados);
+
+    /**
+     * Método abstrato para calcular o número de dias de atraso na devolução.
+     * 
+     * @return o número de dias de atraso.
+     */
+    int calcularDiasAtraso();
 }
+
 

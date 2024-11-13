@@ -1,23 +1,29 @@
 package br.pm.businessLLM;
-
 public class Usuario {
-    private String id;
+    private Long id; // Alterado de String para Long
     private String nome;
-    private double multa; // Representa o valor da multa em dinheiro
+    private String email;
+    private String telefone;
+    private double multa; // Novo atributo para armazenar o valor da multa
 
     // Construtor
-    public Usuario(String id, String nome) {
-        this.id = id;
-        this.nome = nome;
-        this.multa = 0.0; // Inicialmente, o usuário não tem multas
+    public Usuario(Long id, String nome, String email, String telefone) {
+        setId(id);
+        setNome(nome);
+        setEmail(email);
+        setTelefone(telefone);
+        setMulta(0); // Inicializa a multa com zero
     }
 
     // Getters e Setters
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("O ID deve ser um número positivo e válido.");
+        }
         this.id = id;
     }
 
@@ -26,7 +32,32 @@ public class Usuario {
     }
 
     public void setNome(String nome) {
+        if (nome == null || nome.isBlank()) {
+            throw new IllegalArgumentException("O nome não pode ser nulo ou vazio.");
+        }
         this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        if (email == null || !email.matches("^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            throw new IllegalArgumentException("Email inválido.");
+        }
+        this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        if (telefone == null || !telefone.matches("\\d{10,11}")) {
+            throw new IllegalArgumentException("O telefone deve conter apenas números e ter entre 10 e 11 dígitos.");
+        }
+        this.telefone = telefone;
     }
 
     public double getMulta() {
@@ -42,20 +73,11 @@ public class Usuario {
 
     // Método para pagar a multa
     public void pagarMulta() {
-        if (this.multa > 0) {
-            this.multa = 0.0;
-            System.out.println("Multa paga com sucesso!");
+        if (multa > 0) {
+            setMulta(0);
+            System.out.println("Multa paga com sucesso.");
         } else {
-            System.out.println("Não há multas pendentes para este usuário.");
+            System.out.println("Não há multas pendentes.");
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id='" + id + '\'' +
-                ", nome='" + nome + '\'' +
-                ", multa=" + multa +
-                '}';
     }
 }

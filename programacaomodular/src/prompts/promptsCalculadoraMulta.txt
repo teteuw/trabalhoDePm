@@ -1,0 +1,56 @@
+Iteração 1:
+
+Primeiro, crie uma interface Multa, com o método abstrato calcularMulta()
+
+public interface Multa {
+    /**
+     * Método abstrato para calcular a multa por atraso.
+     * 
+     * @param diasAtrasados número de dias de atraso na devolução.
+     * @return o valor da multa calculada.
+     */
+    double calcularMulta(int diasAtrasados);
+}
+
+A interface Multa individualmente está sem sugestões de melhorias. Entretanto, Emprestimo tem um metodo calcularDiasAtraso()
+que deveria vir de Multa, sendo abstrato e posteriormente implementado em Empresimo.
+
+public interface Multa {
+    /**
+     * Método abstrato para calcular a multa por atraso.
+     * 
+     * @param diasAtrasados número de dias de atraso na devolução.
+     * @return o valor da multa calculada.
+     */
+    double calcularMulta(int diasAtrasados);
+
+    /**
+     * Método abstrato para calcular o número de dias de atraso na devolução.
+     * 
+     * @return o número de dias de atraso.
+     */
+    int calcularDiasAtraso();
+}
+Iteração 3: 
+O código segue todos os princípios solid? Multa talvez não seja o nome mais adequado pos lembra o nome de uma entidade,
+entre outras palavras talvez não seria uma boa prática colocar Multa de nome,
+porque seria o nome mais adequado para uma classe Abstrata.
+
+Devido a isso, o nome da interface Multa foi modificado para CalculadoraMulta.
+
+public interface CalculadoraMulta{
+    /**
+     * Método abstrato para calcular a multa por atraso.
+     * 
+     * @param diasAtrasados número de dias de atraso na devolução.
+     * @return o valor da multa calculada.
+     */
+    double calcularMulta(int diasAtrasados);
+
+    /**
+     * Método abstrato para calcular o número de dias de atraso na devolução.
+     * 
+     * @return o número de dias de atraso.
+     */
+    int calcularDiasAtraso();
+}

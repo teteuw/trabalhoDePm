@@ -1,25 +1,31 @@
 package br.pm.businessLLM;
-
-import java.time.LocalDate;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
-
-public class Emprestimo implements Multa {
+public class Emprestimo implements CalculadoraMulta {
+    private Long idEmprestimo;
     private Livro livro;
     private Usuario usuario;
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
-    private boolean devolvido; // true = devolvido, false = ainda emprestado
 
     // Construtor
-    public Emprestimo(Livro livro, Usuario usuario, LocalDate dataEmprestimo, LocalDate dataDevolucao) {
-        this.livro = livro;
-        this.usuario = usuario;
-        this.dataEmprestimo = dataEmprestimo;
-        this.dataDevolucao = dataDevolucao;
-        this.devolvido = false; // Inicia como não devolvido
+    public Emprestimo(Long idEmprestimo, Livro livro, Usuario usuario, LocalDate dataEmprestimo, LocalDate dataDevolucao) {
+        setIdEmprestimo(idEmprestimo);
+        setLivro(livro);
+        setUsuario(usuario);
+        setDataEmprestimo(dataEmprestimo);
+        setDataDevolucao(dataDevolucao);
     }
 
-    // Getters e Setters
+    // Getters e setters
+    public Long getIdEmprestimo() {
+        return idEmprestimo;
+    }
+
+    public void setIdEmprestimo(Long idEmprestimo) {
+        this.idEmprestimo = idEmprestimo;
+    }
+
     public Livro getLivro() {
         return livro;
     }
@@ -52,19 +58,21 @@ public class Emprestimo implements Multa {
         this.dataDevolucao = dataDevolucao;
     }
 
-    public boolean isDevolvido() {
-        return devolvido;
+    // Método devolver
+    public void devolver() {
+        if (livro.isStatus()) { // Livro já está disponível
+            System.out.println("Este empréstimo já foi finalizado.");
+        } else {
+            livro.setStatus(true); // Marca o livro como disponível
+            System.out.println("Livro devolvido com sucesso.");
+        }
     }
 
-    public void setDevolvido(boolean devolvido) {
-        this.devolvido = devolvido;
-    }
-
-    // Implementação do método calcularMulta
+    // Sobrescrever os métodos da interface Multa
     @Override
     public double calcularMulta(int diasAtrasados) {
         if (diasAtrasados <= 0) {
-            return 0.0; // Sem multa se não houver atraso
+            return 0.0; // Sem multa
         }
 
         double multa = diasAtrasados * 1.0; // R$ 1,00 por dia de atraso
@@ -73,21 +81,11 @@ public class Emprestimo implements Multa {
         return Math.min(multa, valorMaximoMulta); // Garante que a multa não exceda o limite
     }
 
-    // Método para calcular o número de dias de atraso
+    @Override
     public int calcularDiasAtraso() {
         if (LocalDate.now().isAfter(dataDevolucao)) {
             return (int) ChronoUnit.DAYS.between(dataDevolucao, LocalDate.now());
         }
-        return 0; // Sem atraso se a data atual for antes ou igual à data de devolução
-    }
-
-    // Método para finalizar o empréstimo (devolução)
-    public void devolver() {
-        if (devolvido) {
-            throw new IllegalStateException("Erro: O empréstimo já foi finalizado.");
-        }
-        this.devolvido = true;
-        livro.setStatus(true); // Marca o livro como disponível
-        System.out.println("Livro devolvido com sucesso.");
+        return 0; // Sem atraso
     }
 }
