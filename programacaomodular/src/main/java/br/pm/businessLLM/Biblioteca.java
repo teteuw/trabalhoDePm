@@ -75,17 +75,16 @@ public class Biblioteca {
 
     // Métodos para Gerenciar Empréstimos
     public void registrarEmprestimo(Emprestimo emprestimo) {
-        if (emprestimo != null && !emprestimo.isDevolvido()) {
+        if (emprestimo != null && emprestimo.getLivro().isStatus()) { // Verifica se o livro está disponível
             emprestimos.add(emprestimo);
             emprestimo.getLivro().emprestar(); // Marca o livro como emprestado
             System.out.println("Empréstimo registrado para o livro: " + emprestimo.getLivro().getNomeLivro());
         } else {
-            throw new IllegalArgumentException("Empréstimo inválido ou já devolvido.");
+            throw new IllegalArgumentException("Empréstimo inválido ou livro já está emprestado.");
         }
     }
-
+    
     public List<Emprestimo> getEmprestimos() {
         return emprestimos;
     }
 }
-
