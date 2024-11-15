@@ -105,7 +105,5 @@ na memória que o id do Usuario que ele tinha criado mais cedo era String.
                 return usuario;
             }
  Dito isso, o getId retornava um String, e o idUsuario passado como parâmetro era inteiro, resultando no erro
-incompatibilidade de operadores(Java 16777231)
-
-Iteração 2: 
-
+incompatibilidade de operadores(Java 16777231). Entretanto, esse era um erro a ser concertado em outra classe, portanto não
+houve necessidade de alterações.
